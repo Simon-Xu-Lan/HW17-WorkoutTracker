@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 const db = require("./models");
 
@@ -15,7 +15,10 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URL || "mongodb://user:password1@ds039185.mlab.com:39185/heroku_vlnq5rxd", { useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URL, { 
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
 
 
 require("./routes/apiRoutes")(app);
