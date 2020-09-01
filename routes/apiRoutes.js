@@ -33,7 +33,8 @@ module.exports = function(app) {
     });
     
     app.post("/api/workoutsbulk", (req, res) => {
-        db.Workout.insert(req.body)
+        console.log(typeof req.body);
+        db.Workout.insertMany(JSON.parse(req.body))
             .then( data => {
                     res.json(data)
                 })
