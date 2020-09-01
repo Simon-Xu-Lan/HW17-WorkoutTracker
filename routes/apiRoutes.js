@@ -22,7 +22,7 @@ module.exports = function(app) {
     });
 
     app.post("/api/workouts", (req, res) => {
-        db.Workout.create({})
+        db.Workout.create(req.body)
             .then( data => {
                     res.json(data)
                 })
@@ -32,6 +32,17 @@ module.exports = function(app) {
     
     });
     
+    app.post("/api/workoutsbulk", (req, res) => {
+        db.Workout.insert(req.body)
+            .then( data => {
+                    res.json(data)
+                })
+                .catch(err => {
+                    res.json(err);
+                });
+    
+    });
+
 
     app.put("/api/workouts/:id", ({body, params}, res) => {
 
